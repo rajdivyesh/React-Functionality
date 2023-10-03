@@ -5,6 +5,8 @@ import './App.css';
 function App() {
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
+  const [submittedData, setSubmittedData] = useState('');
+
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -12,6 +14,12 @@ function App() {
   const handleLastNameChange = (e) =>{
     setLastName(e.target.value);
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const submittedInfo = `First Name: ${firstname}, Last Name: ${lastname}`;
+    setSubmittedData(submittedInfo);
+  };
 
   return (
     <div className="App" style={{backgroundColor: 'lightblue'}}>
@@ -28,13 +36,41 @@ function App() {
         >
           Learn React
         </a>
+        <form onSubmit={handleSubmit}>
+          <label>
+            First Name:
+            <input
+                type="text"
+                value={firstname}
+                onChange={handleFirstNameChange}
+            />
+          </label>
+          <br />
+          <label>
+            Last Name:
+            <input
+                type="text"
+                value={lastname}
+                onChange={handleLastNameChange}
+            />
+          </label>
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+        {submittedData && (
+            <div>
+              <p>Submitted Data:</p>
+              <p>{submittedData}</p>
+            </div>
+
+        )}
       </header>
     </div>
   );
 }
 
-//export default App;
-
+export default App;
+/*
 const NewForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -127,3 +163,5 @@ const NewForm = () => {
 };
 
 export default NewForm;
+
+ */
